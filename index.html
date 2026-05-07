@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<img src ="logo.png" class="logo">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sunneries International Ministry</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f9b8e,#1e3c72);
+overflow:hidden;
+}
+
+.background{
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
+}
+
+.circle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,0.1);
+animation:fly 12s linear infinite;
+}
+
+.circle:nth-child(1){
+width:120px;
+height:120px;
+left:10%;
+animation-duration:15s;
+}
+
+.circle:nth-child(2){
+width:80px;
+height:80px;
+left:70%;
+animation-duration:12s;
+}
+
+.circle:nth-child(3){
+width:150px;
+height:150px;
+left:40%;
+animation-duration:18s;
+}
+
+@keyframes fly{
+0%{
+transform:translateY(100vh) rotate(0deg);
+opacity:0;
+}
+50%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+}
+
+.container{
+width:380px;
+padding:30px;
+border-radius:20px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(10px);
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+color:white;
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0px);}
+}
+
+.logo{
+width:120px;
+display:block;
+margin:auto;
+margin-bottom:15px;
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+outline:none;
+font-size:15px;
+}
+
+button{
+width:100%;
+padding:13px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#00c6ff,#00ffcc);
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.success{
+display:none;
+margin-top:15px;
+text-align:center;
+color:#00ffcc;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background">
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+</div>
+
+<div class="container">
+
+<img src="logo.png" class="logo">
+
+<h2>Membership Registration</h2>
+
+<form id="regForm">
+
+<input type="text"
+name="entry.747781422"
+placeholder="Full Name"
+required>
+
+<input type="number"
+name="entry.1247218424"
+placeholder="Age"
+required>
+
+<input type="text"
+name="entry.118477979"
+placeholder="Location"
+required>
+
+<input type="email"
+name="entry.1695711083"
+placeholder="Email Address"
+required>
+
+<input type="tel"
+name="entry.1306951155"
+placeholder="WhatsApp Number"
+required>
+
+<select name="entry.1931915658" required>
+<option value="">Marital Status</option>
+<option>Single</option>
+<option>Married</option>
+<option>Engaged</option>
+<option>Widowed</option>
+</select>
+
+<button type="submit">
+Register Now
+</button>
+
+<div class="success" id="successMsg">
+Registration Successful!
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("regForm")
+.addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let form = this;
+
+let data = new FormData(form);
+
+fetch(
+"https://docs.google.com/forms/d/e/1FAIpQLSfp8GHV5_RuZFOTZnlJnyGe7AZRUkDtfHr_-SnQm8Hk2hiomg/formResponse",
+{
+method:"POST",
+mode:"no-cors",
+body:data
+});
+
+let name = form[0].value;
+let phone = form[4].value;
+
+let message =
+`Hello ${name}, welcome to Sunneries International Ministry. We are glad to receive you.`;
+
+window.open(
+`https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+);
+
+document.getElementById("successMsg").style.display="block";
+
+form.reset();
+
+});
+
+</script>
+
+</body>
+</html>
